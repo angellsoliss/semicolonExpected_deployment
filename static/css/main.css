@@ -1,0 +1,380 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    font-family:'Poppins', sans-serif;
+    box-sizing: border-box; /* enesure padding and margin does not cause overflow*/
+}
+
+.artists-box::-webkit-scrollbar{
+    scrollbar-width: thin;
+}
+
+/*.artists-box::-webkit-scrollbar-track{
+    background: rgba(21, 21, 21, 0.7);
+    border-radius: 100vw;
+}*/
+
+.artists-box::-webkit-scrollbar-thumb{
+    cursor: pointer;
+    background:rgba(113, 113, 113, 0.7);
+    
+}
+
+.artists-box::-webkit-scrollbar-thumb:hover{
+    background:rgba(113, 113, 113, 1)
+}
+
+.large {
+    font-size: 32px;
+}
+
+.med{
+    font-size: 24px;
+}
+
+.small {
+    font-size: 16px;
+}
+
+body {
+    background: #121212;
+    color: white;
+    margin: 0;
+    overflow-x: hidden; /* hide horizontal scrollbar*/
+}
+
+/*meant for the gradient effect on homepage*/
+.homeWrap{
+    margin-top: -3.4em;
+    min-height: 85.6vh;
+    /*padding-top: 100px; /* account for top bar height */
+    background: linear-gradient(45deg, #1db954, #212121, #212121, #1db954);
+    background-size: 300% 300%;
+    animation: color 25s ease-in-out infinite;
+}
+
+/* bar at top of screen that displays currently logged in user */
+.top-bar {
+    background-color:rgba(21, 21, 21, 0.3); /* semi-transparent background */
+    margin-top: -.5em;
+    border-bottom: 2px solid #1ED760;
+    color: black;
+    padding-bottom: 5px;
+    padding-left: 40px;
+    text-align: left;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    backdrop-filter: blur(10px); /* frosted glass effect */
+    -webkit-backdrop-filter: blur(10px);
+    
+}
+
+.edit{
+    position: absolute;
+    top: 20px;  /* Set it to the top */
+    right: 40px; /* Align it to the right edge */
+    text-align: center;
+    font-size: 24px;
+    padding: 10px 28px;
+    margin: 0.2em;
+}
+
+.top-bar h1{
+    color: white;
+}
+
+/* box for artistss */
+.artists-box{
+    background-color: rgba(21, 21, 21, 0.7);
+    border: 4px rgba(21, 21, 21, 0.7);
+    border-radius: 12px;
+    padding: 20px;
+    width: 30vw;
+    margin: 30px;
+    position: sticky;
+    top: 80px; /* adjust based on layout */
+    height: calc(100vh - 170px); /* limit height of artists box to take up vertical length of window accounting for .topbar */
+    overflow-y: auto; /* enable scrolling */
+    color: white;
+    text-align: center;
+}
+
+.artists-box h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.artists-box ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.artists-box li {
+    font-size: 18px;
+    line-height: 1.2em;
+    padding: 8px 10px;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+.artists-box li:hover {
+    color: #1db954; /* highlight on hover */
+    background-color: rgba(255, 255, 255, 0.1); /* subtle hover effect */
+    border-radius: 8px;
+}
+
+.instruction-box{
+    background-color: rgba(21, 21, 21, 0.7);
+    border: 4px rgba(21, 21, 21, 0.7);
+    border-radius: 12px;
+    padding: 20px;
+    width: 100%; /* same width as .artists-box */
+    margin: 30px;
+    position: left;
+    top: 80px; /* matches the top alignment of artists-box */
+    color: white;
+    text-align: center;
+}
+
+.emphasize{
+    color: #1ED760;
+    font-weight: bold;
+}
+
+/* content wrapper with animated gradient background */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    min-height: 100vh;
+    padding-top: 100px; /* account for top bar height */
+    background: linear-gradient(45deg, #1db954, #212121, #212121, #1db954);
+    background-size: 300% 300%;
+    animation: color 25s ease-in-out infinite;
+}
+
+.mycontainer{
+    background-color: rgba(21, 21, 21, 0.7);
+    border: 4px rgba(21, 21, 21, 0.7);
+    border-radius: 12px;
+    padding: 20px;
+    width: 30vw;
+    margin: 30px;
+    position: sticky;
+    top: 80px; /* adjust based on layout */
+    height: calc(100vh - 170px); /* limit height of artists box to take up vertical length of window accounting for .topbar */
+    overflow-y: auto; /* enable scrolling */
+    color: white;
+    text-align: center;
+}
+
+.mycontainer h2{
+    text-align: center;
+}
+
+.mycontainer ul{
+    font-size: 18.6px;
+    text-align: left;
+}
+
+@keyframes color{
+    0%{
+        background-position: 0 50%;
+    }
+
+    50%{
+        background-position: 100% 50%;
+    }
+
+    100%{
+        background-position: 0 50%;
+    }
+}
+
+.head{
+    margin: 1.5em;
+    margin-top: -.5em;
+    padding-left: 1em;
+    position: relative;
+}
+
+
+
+.pill{
+    position: absolute;
+    top: 0;  /* Set it to the top */
+    right: 20px; /* Align it to the right edge */
+    background-color: #1ED760;
+    text-align: center;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    border-radius: 1.5em;
+    padding: 10px 28px;
+    margin: 0.2em;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: 0.2s;
+    
+}
+.pill:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.card{
+    margin: 3em;
+    padding-top: .8em;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    font-weight: lighter;
+}
+
+selector {
+    display: block;
+}
+
+.desk{
+    text-align: center;
+    margin-top: -3.3em;
+    color: #1db954;
+}
+
+.YOUR{
+    color: #1db954;
+}
+
+.pborder{
+    background-color: rgb(37, 37, 37);
+    border: 2px solid rgb(37, 37, 37);
+    border-radius: 25px;
+    padding: 1em;
+}
+
+.wrapper table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    
+}
+
+/* center-align text and buttons in table cells */
+.wrapper table td {
+    text-align: center;
+    padding: 5px;
+}
+
+.wrapper th{
+    position: top;
+    top: 0;
+    width: 200%;
+    border-bottom: 1px #1db954;
+    z-index: 1000;
+    backdrop-filter: blur(10px); /* frosted glass effect */
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* submit button spans the full cell width */
+.wrapper button[type="submit"] {
+    width: 90%;
+    background-color: rgba(60, 60, 60, 0.7);
+    color: white;
+    padding: 12px 20px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0.9;
+    transition: 0.2s;
+    
+}
+
+.wrapper button[type="submit"]:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    background-color: #1db954;
+}
+
+.startbox button{
+    position: absolute;
+    top: 11em;  /* Set it to the top */
+    right: 50px; /* Align it to the right edge */
+    background-color: #1ED760;
+    text-align: center;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    border-radius: 1.5em;
+    padding: 10px 28px;
+    margin: 0.2em;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: 0.2s;
+}
+
+.startbox button:hover{
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.stop button{
+    position: absolute;
+    top: 15em;  /* Set it to the top */
+    right: 50px; /* Align it to the right edge */
+    background-color: #1ED760;
+    text-align: center;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    border-radius: 1.5em;
+    padding: 10px 28px;
+    margin: 0.2em;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: 0.2s;
+}
+
+.stop button:hover{
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.edit .dropdown button{
+    cursor: pointer;
+    color:#1ED760;
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-family:'Poppins', sans-serif;
+    position: relative;
+}
+
+.edit .dropdown a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 10px;
+}
+
+.edit .dropdown .content{
+    display: none;
+    position: absolute;
+    background-color: #121212;
+    min-width: auto;
+    box-shadow: 2px 2px 5px white;
+}
+
+.edit .dropdown:hover .content{
+    display: block;
+}
+
+.edit .dropdown a:hover{
+    background-color: #1db954;
+}
+
+

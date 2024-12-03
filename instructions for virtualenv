@@ -1,0 +1,12 @@
+Make sure you are in your flaskintro directory (or whatever you named it) 
+Then do these
+
+pip install —user virtualenv
+
+To create virtual environment:
+python -m virtualenv env 
+
+To activate:
+cd venv
+cd Scripts
+.\activate.bat (or just activate.bat whatever works)

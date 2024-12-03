@@ -1,0 +1,28 @@
+@startuml angel UML
+title FIRST SPRINT
+
+actor User
+boundary FlaskApp as Flask
+control SpotifyAPI as Spotify
+skinparam Style strictuml
+skinparam SequenceMessageAlignment center
+
+User -> Flask : Open Web Page
+Flask -> Spotify : Redirect to Spotify Login
+
+Spotify -> User : Display Login Page
+User -> Spotify : Enter Credentials
+
+Spotify -> Spotify : Authenticate User
+Spotify -> Flask : Redirect with Auth Token (success)
+Spotify -> Flask : Redirect with Error (failure)
+
+alt Successful Authentication
+    Flask -> Spotify : Request Display Name of Current User using Auth Token
+    Spotify -> Flask : Return Display Name
+    Flask -> User : Display Display Name on Web Page
+else Unsuccessful Authentication
+    Flask -> User : Display Error Message (Login failed)
+
+end
+@enduml

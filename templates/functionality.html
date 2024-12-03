@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block head %} 
+<title>Semicolon Expected</title>
+<div class="top-bar">
+    <h1>
+        <span class="large">S</span><span class="med">potify</span>
+        <span class="large">V</span><span class="med">oice</span>
+        <span class="large">C</span><span class="med">ontrol</span>
+        <span class="small">by Semicolon Expected</span>
+        <span class="edit">
+            <div class="dropdown">
+                <button>
+                    {{ username }}
+                </button>
+                <div class="content">
+                    <form action="/">
+                        <button type="submit">
+                            Sign Out
+                        </button>
+                    </form>
+                </div>
+            </div> 
+        </span>
+    </h1>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+    <div class="artists-box">
+        <h2>You've been loving these artists recently:</h2>
+            <ol>
+                {% for name in top_artists %}
+                <li>{{ name }}</li>
+                {% endfor %}
+            </ol>
+        <br>
+        <h1>Listening Status: <span class="emphasize">{{ listening_status }}</span></h1>
+        <form action="/startListening">
+            <button type="submit">
+                Start Listening Feed
+            </button>
+        </form>
+        <form action="/stopListening">
+            <button type="submit">
+                Stop Listening Feed
+            </button> 
+        </form>
+    </div>
+    
+    <!--Commands -->
+    <div class="mycontainer">
+        <h2>How to Use:</h2>
+            <p>instrutions will go here eventually ^_^</p>
+            <h2>Commands</h2>
+            <ul>
+                <li><span class="emphasize">Next</span> - Skips to the next song</li>
+                <li><span class="emphasize">Previous</span> - Skips to previous song</li>
+                <li><span class="emphasize">Pause</span> - Pauses playback</li>
+                <li><span class="emphasize">Play</span> - Resumes paused playback</li>
+                <li><span class="emphasize">Save</span> - Saves currently playing song to liked songs</li>
+                <li><span class="emphasize">Remove</span> - Removes the currently selected song from liked songs<br></li>
+                <li><span class="emphasize">Volume</span> - (25/50/75/max)</li>
+                <li><span class="emphasize">Mute</span> - Sets playback volume to zero</li>
+                <li><span class="emphasize">Shuffle</span> - Enables song shuffling</li>
+                <li><span class="emphasize">Shuffle Off</span> - Disables shuffling</li>
+                <li><span class="emphasize">Repeat</span> - Enables song repeating</li>
+                <li><span class="emphasize">Repeat Off</span> - Disables repeating</li>
+            </ul>
+        </p>
+    </div>
+</div>
+{% endblock %}
