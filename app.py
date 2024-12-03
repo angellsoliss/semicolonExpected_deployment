@@ -11,7 +11,6 @@ import requests
 from datetime import datetime
 import speech_recognition as sr
 import threading
-import pyttsx3
 
 #load .env file, get client secret, id
 load_dotenv()
@@ -54,8 +53,6 @@ global listening
 listening = False
 
 def listen_for_commands(access_token):
-    #initialize text-to-speech
-    tts = pyttsx3.init()
     global listening
 
     #create spotipy object, pass access token
@@ -75,8 +72,6 @@ def listen_for_commands(access_token):
 
     with sr.Microphone() as source:
         r.adjust_for_ambient_noise(source, duration=0.7)
-        tts.say("Listening")
-        tts.runAndWait()
         
         while True:
             if not listening:
