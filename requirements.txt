@@ -15,6 +15,7 @@ packaging==24.2
 pypiwin32==223
 python-dotenv==1.0.1
 pyttsx3==2.98
+pywin32==223
 redis==5.2.0
 requests==2.32.3
 SpeechRecognition==3.11.0
