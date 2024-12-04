@@ -176,8 +176,19 @@ body {
 }
 
 .mycontainer ul{
-    font-size: 18.6px;
+    font-size: 15.5px;
     text-align: left;
+    line-height: 1.8;
+}
+
+.mycontainer ol{
+    text-align: left;
+    line-height: 1.8;
+}
+
+.mycontainer ol li::marker{
+    color: #1ED760;
+    font-weight: bold;
 }
 
 @keyframes color{
@@ -386,5 +397,3 @@ selector {
 .edit .dropdown a:hover{
     background-color: #1db954;
 }
-
-

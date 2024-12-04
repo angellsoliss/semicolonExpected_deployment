@@ -29,7 +29,7 @@
 {% block body %}
 <div class="wrapper">
     <div class="artists-box">
-        <h2>You've been loving these artists recently:</h2>
+        <h2>You've been loving these artists recently</h2>
             <ol>
                 {% for name in top_artists %}
                 <li>{{ name }}</li>
@@ -42,8 +42,16 @@
     
     <!--Commands -->
     <div class="mycontainer">
-        <h2>How to Use:</h2>
-            <p>instrutions will go here eventually ^_^</p>
+        <h2>How to Use</h2>
+        <ol>
+            <li>Install and run ListeningWidget.</li>
+            <li>Open Spotify and play a song.</li>
+            <li>Copy your listening token and paste it into ListeningWidget.</li>
+            <li>Click "Start Listening" to begin voice control.</li>
+            <li>Control Spotify with commands below.</li>
+            <li>Click "Stop Listening" to pause voice control.</li>
+        </ol>
+            <br>
             <h2>Commands</h2>
             <ul>
                 <li><span class="emphasize">Next</span> - Skips to the next song</li>
