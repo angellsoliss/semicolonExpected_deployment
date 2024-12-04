@@ -36,17 +36,8 @@
                 {% endfor %}
             </ol>
         <br>
-        <h1>Listening Status: <span class="emphasize">{{ listening_status }}</span></h1>
-        <form action="/startListening">
-            <button type="submit">
-                Start Listening Feed
-            </button>
-        </form>
-        <form action="/stopListening">
-            <button type="submit">
-                Stop Listening Feed
-            </button> 
-        </form>
+        <h2>Listening Token</h2>
+        <p class="token-box">{{ token }}</p>
     </div>
     
     <!--Commands -->

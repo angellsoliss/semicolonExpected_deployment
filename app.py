@@ -10,7 +10,6 @@ import urllib
 import requests
 from datetime import datetime
 import speech_recognition as sr
-import threading
 
 #load .env file, get client secret, id
 load_dotenv()
@@ -21,7 +20,7 @@ client_secret = os.getenv("CLIENT_SECRET")
 scope = 'user-modify-playback-state user-read-playback-state playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative user-library-read user-top-read'
 
 
-REDIRECT_URI = "https://semicolonexpected-deployment.onrender.com/access_token"
+REDIRECT_URI = "http://localhost:5000/access_token"
 
 #store access token in flask session
 cache_handler = FlaskSessionCacheHandler(session)
@@ -48,66 +47,6 @@ AUTH_URL = "https://accounts.spotify.com/authorize"
 
 #url to refresh token
 TOKEN_URL = "https://accounts.spotify.com/api/token"
-
-global listening
-listening = False
-
-def listen_for_commands(access_token):
-    global listening
-
-    #create spotipy object, pass access token
-    sp = spotipy.Spotify(auth=access_token)
-
-    commands = {
-        "next": sp.next_track,
-        "previous": sp.previous_track,
-        "pause": sp.pause_playback,
-        "play": sp.start_playback,
-        "mute": lambda: sp.volume(volume_percent=0),
-        "volume 25": lambda: sp.volume(volume_percent=25),
-        "volume 50": lambda: sp.volume(volume_percent=50),
-        "volume 75": lambda: sp.volume(volume_percent=75),
-        "volume max": lambda: sp.volume(volume_percent=100),
-    }
-
-    with sr.Microphone() as source:
-        r.adjust_for_ambient_noise(source, duration=0.7)
-        
-        while True:
-            if not listening:
-                print("Listening feed stopped")
-                #exit if not listening
-                return 
-
-            try:
-                    #capture speech only if still listening
-                    if not listening:
-                        print("Stopped before processing audio")
-                        return
-
-                    print("Listening for speech...")
-                    audio = r.listen(source, timeout=15, phrase_time_limit=20)
-                    
-                    if not listening:
-                        print("stopped before processing recognized speech")
-                        return
-
-                    speech = r.recognize_google(audio).lower()
-                    print(f"Recognized command: {speech}")
-
-                    #handle commands
-                    action = commands.get(speech)
-                    if action:
-                        action()
-                    else:
-                        print(f"Unknown command: {speech}")
-
-            except sr.RequestError as e:
-                print(f"Could not request results: {e}")
-            except sr.UnknownValueError:
-                print("Could not understand audio")
-            except Exception as ex:
-                print(f"Unexpected error: {ex}")
 
 #homepage, what the user sees before they log in with spotify
 @app.route('/')
@@ -205,65 +144,22 @@ def display_name_playlists():
     #timeout after 10 seconds
     sp = spotipy.Spotify(auth_manager=sp_oauth, auth=session['access_token'], requests_timeout=10)
 
-    #get listening status for display, set to not listening by default by default
-    global listening_status
-    listening_status = "Not Listening"
-
-    #check listening status, set display to match
-    if listening:
-        listening_status = "Listening"
-    else:
-        listening_status = "Not Listening"
-
     #get user information
     global username
     username = sp.current_user()['display_name']
     response = sp.current_user_top_artists(limit=10)
     global top_artists
     top_artists = [artist['name'] for artist in response['items']]
+    token = session['access_token']
 
     #print info, used for debugging
     print(username)
     print(top_artists)
+    print(session['access_token'])
 
     #render html page, pass username and user_email variables so they can be displayed
-    return render_template('functionality.html', username=username, top_artists=top_artists, listening_status=listening_status)
-
-@app.route('/startListening')
-def startListening():
-    global listening, listening_thread
-
-    if not listening:
-        listening = True
-        #fetch access token from session
-        access_token = session.get('access_token')
-        if access_token:
-            #start listening thread
-            listening_thread = threading.Thread(target=listen_for_commands, args=(access_token,))
-            listening_thread.start()
-            global listening_status
-            listening_status = "Listening"
-            print("Listening started")
-        else:
-            #redirect to login if access token is not found
-            return redirect('/login')
-    else:
-        print("already listening")
-    
-    return render_template('functionality.html', username=username, top_artists=top_artists, listening_status=listening_status)
-
-@app.route('/stopListening')
-def stopListening():
-    global listening
-    listening = False
-    global listening_status
-    listening_status = "Not Listening"
-
-    #flush any ongoing operations
-    r.energy_threshold = 4000 
-    print("Listening stopped by user")
-    return render_template('functionality.html', username=username, top_artists=top_artists, listening_status=listening_status)
+    return render_template('functionality.html', username=username, top_artists=top_artists, token=token)
 
 #run app
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', debug=True)
