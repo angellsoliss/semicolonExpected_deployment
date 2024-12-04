@@ -20,7 +20,7 @@ client_secret = os.getenv("CLIENT_SECRET")
 scope = 'user-modify-playback-state user-read-playback-state playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative user-library-read user-top-read'
 
 
-REDIRECT_URI = "http://localhost:5000/access_token"
+REDIRECT_URI = "https://semicolonexpected-deployment.onrender.com/access_token"
 
 #store access token in flask session
 cache_handler = FlaskSessionCacheHandler(session)
