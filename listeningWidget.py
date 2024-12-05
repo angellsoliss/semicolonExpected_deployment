@@ -30,42 +30,39 @@ class RedirectText:
     def flush(self):
         pass
 
+listening_lock = threading.Lock()
 
 def listen_for_commands(access_token):
     global listening
     sp = spotipy.Spotify(auth=access_token)
 
     def save_current_song():
-        """Save the currently playing song to the user's liked songs."""
         playback = sp.current_playback()
         if playback and playback.get("item"):
             track_id = playback["item"]["id"]
-            track_name = playback["item"]["name"]
             if not sp.current_user_saved_tracks_contains([track_id])[0]:
                 sp.current_user_saved_tracks_add([track_id])
-                print(f"Saved: {track_name}")
-                tts.say(f"Saved {track_name}")
+                print("Track Saved to Liked Songs")
+                tts.say("Track Saved to Liked Songs")
             else:
-                print(f"{track_name} is already in your liked songs.")
-                tts.say(f"{track_name} is already saved.")
+                print("Track is already in your liked songs.")
+                tts.say("Track is already in your liked songs.")
         else:
             print("No song is currently playing.")
             tts.say("No song is currently playing.")
         tts.runAndWait()
 
     def remove_current_song():
-        """Remove the currently playing song from the user's liked songs."""
         playback = sp.current_playback()
         if playback and playback.get("item"):
             track_id = playback["item"]["id"]
-            track_name = playback["item"]["name"]
             if sp.current_user_saved_tracks_contains([track_id])[0]:
                 sp.current_user_saved_tracks_delete([track_id])
-                print(f"Removed: {track_name}")
-                tts.say(f"Removed {track_name}")
+                print("Track removed from Liked Songs")
+                tts.say("Track removed from Liked Songs")
             else:
-                print(f"{track_name} is not in your liked songs.")
-                tts.say(f"{track_name} is not saved.")
+                print("Track is not in your liked songs.")
+                tts.say("Track is not in your liked songs.")
         else:
             print("No song is currently playing.")
             tts.say("No song is currently playing.")
@@ -105,14 +102,15 @@ def listen_for_commands(access_token):
                     speech = r.recognize_google(audio).lower()
                     print(f"Recognized command: {speech}")
 
-                    #handle commands
-                    action = commands.get(speech)
-                    if action:
-                        action()
-                    else:
-                        print(f"Unknown command: {speech}")
+                    # Check and prevent commands from being triggered twice
+                    with listening_lock:
+                        action = commands.get(speech)
+                        if action:
+                            action()
+                        else:
+                            print(f"Unknown command: {speech}")
                 except sr.UnknownValueError:
-                    pass  #ignore and continue
+                    pass  # ignore and continue
                 except sr.RequestError as e:
                     print(f"Could not request results: {e}")
 
@@ -120,7 +118,6 @@ def listen_for_commands(access_token):
                 print(f"Unexpected error: {ex}")
 
         print("Exiting listening loop")
-
 
 
 #function to start listening for voice commands
@@ -176,7 +173,7 @@ class SpotifyVoiceControlApp:
                   relief=[("pressed", "sunken"), ("!pressed", "raised")])
 
         #authorization token input
-        self.token_label = tk.Label(root, text="Enter your Spotify authorization token:", bg="#121212", fg="white")
+        self.token_label = tk.Label(root, text="Copy and paste your Listening Token here:", bg="#121212", fg="white")
         self.token_label.pack(pady=5)
 
         self.token_entry = tk.Entry(root, width=50)
