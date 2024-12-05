@@ -31,10 +31,45 @@ class RedirectText:
         pass
 
 
-#spotify command functions
 def listen_for_commands(access_token):
     global listening
     sp = spotipy.Spotify(auth=access_token)
+
+    def save_current_song():
+        """Save the currently playing song to the user's liked songs."""
+        playback = sp.current_playback()
+        if playback and playback.get("item"):
+            track_id = playback["item"]["id"]
+            track_name = playback["item"]["name"]
+            if not sp.current_user_saved_tracks_contains([track_id])[0]:
+                sp.current_user_saved_tracks_add([track_id])
+                print(f"Saved: {track_name}")
+                tts.say(f"Saved {track_name}")
+            else:
+                print(f"{track_name} is already in your liked songs.")
+                tts.say(f"{track_name} is already saved.")
+        else:
+            print("No song is currently playing.")
+            tts.say("No song is currently playing.")
+        tts.runAndWait()
+
+    def remove_current_song():
+        """Remove the currently playing song from the user's liked songs."""
+        playback = sp.current_playback()
+        if playback and playback.get("item"):
+            track_id = playback["item"]["id"]
+            track_name = playback["item"]["name"]
+            if sp.current_user_saved_tracks_contains([track_id])[0]:
+                sp.current_user_saved_tracks_delete([track_id])
+                print(f"Removed: {track_name}")
+                tts.say(f"Removed {track_name}")
+            else:
+                print(f"{track_name} is not in your liked songs.")
+                tts.say(f"{track_name} is not saved.")
+        else:
+            print("No song is currently playing.")
+            tts.say("No song is currently playing.")
+        tts.runAndWait()
 
     commands = {
         "next": sp.next_track,
@@ -43,13 +78,15 @@ def listen_for_commands(access_token):
         "play": sp.start_playback,
         "repeat": lambda: sp.repeat("track"),
         "continue": lambda: sp.repeat("off"),
-        "shuffle": lambda:  sp.shuffle(True),
+        "shuffle": lambda: sp.shuffle(True),
         "order": lambda: sp.shuffle(False),
         "mute": lambda: sp.volume(volume_percent=0),
         "volume 25": lambda: sp.volume(volume_percent=25),
         "volume 50": lambda: sp.volume(volume_percent=50),
         "volume 75": lambda: sp.volume(volume_percent=75),
         "volume max": lambda: sp.volume(volume_percent=100),
+        "save": save_current_song,
+        "remove": remove_current_song,
     }
 
     with sr.Microphone() as source:

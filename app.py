@@ -17,7 +17,7 @@ client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
 
 #determine permissions for app
-scope = 'user-modify-playback-state user-read-playback-state playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative user-library-read user-top-read'
+scope = 'user-modify-playback-state user-read-playback-state playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative user-library-read user-library-modify user-top-read'
 
 
 REDIRECT_URI = "https://semicolonexpected-deployment.onrender.com/access_token"
