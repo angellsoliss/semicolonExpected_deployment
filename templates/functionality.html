@@ -36,22 +36,24 @@
                 {% endfor %}
             </ol>
         <br>
-        <h2>Listening Token</h2>
-        <p class="token-box">{{ token }}</p>
+        
     </div>
     
-    <!--Commands -->
-    <div class="mycontainer">
+    <div class="howToBox">
         <h2>How to Use</h2>
         <ol>
-            <li>Install and run ListeningWidget.</li>
+            <li>Install and run ListeningWidget. <a href="https://drive.google.com/uc?export=download&id=13rCErYNqlR_7qpgTmO0dMwQHndEeI_ob" target="_blank">(Click Here to Install ListeningWidget)</a></li>
             <li>Open Spotify and play a song.</li>
             <li>Copy your listening token and paste it into ListeningWidget.</li>
             <li>Click "Start Listening" to begin voice control.</li>
-            <li>Control Spotify with commands below.</li>
+            <li>Control Spotify with commands listed.</li>
             <li>Click "Stop Listening" to pause voice control.</li>
         </ol>
-            <br>
+
+    </div>
+
+    <!--Commands -->
+    <div class="mycontainer">
             <h2>Commands</h2>
             <ul>
                 <li><span class="emphasize">Next</span> - Skips to the next song</li>
@@ -64,10 +66,16 @@
                 <li><span class="emphasize">Mute</span> - Sets volume to zero</li>
                 <li><span class="emphasize">Shuffle</span> - Enables song shuffling</li>
                 <li><span class="emphasize">Order</span> - Disables shuffling</li>
-                <li><span class="emphasize">Repeat</span> - Loops the song currently playing</li>
+                <li><span class="emphasize">Repeat</span> - Enables song repeating</li>
                 <li><span class="emphasize">Continue</span> - Disables the loop enabled by the Repeat command</li>
             </ul>
         </p>
     </div>
+
+   <div class="ListeningBox">
+    <h2>Listening Token</h2>
+        <p class="token-box">{{ token }}</p>
+   </div>
+    
 </div>
 {% endblock %}
