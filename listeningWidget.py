@@ -69,7 +69,7 @@ def listen_for_commands(access_token):
         tts.runAndWait()
 
     commands = {
-        "next": sp.next_track,
+        "skip": sp.next_track,
         "previous": sp.previous_track,
         "pause": sp.pause_playback,
         "play": sp.start_playback,
@@ -94,7 +94,7 @@ def listen_for_commands(access_token):
         while listening:
             try:
                 print("Listening for speech...")
-                audio = r.listen(source, timeout=30, phrase_time_limit=20)
+                audio = r.listen(source, timeout=5, phrase_time_limit=10)
                 if not listening:
                     break
 
