@@ -529,7 +529,7 @@ selector {
     width: 10%;
     height: 10%;
     margin: 45vh;
-    margin-left: 45vw;
+    margin-left: 30vw;
     position: fixed;
     z-index: 5;
 }
