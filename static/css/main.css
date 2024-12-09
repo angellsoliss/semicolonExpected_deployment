@@ -476,6 +476,7 @@ selector {
     position: sticky;
     text-align: center;
     overflow-y: auto;
+    font-size: 0.899vw;
 }
 
 .howToBox a {
