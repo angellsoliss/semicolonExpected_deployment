@@ -163,12 +163,7 @@ body {
     overflow-y: auto; /* enable scrolling */
     color: white;
     text-align: center;
-}
-
-.artists-box h2 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 15px;
+    font-size: 100%;
 }
 
 .artists-box ol {
@@ -178,7 +173,6 @@ body {
 }
 
 .artists-box li {
-    font-size: 18px;
     line-height: 1.6em;
     padding: 8px 10px;
     margin: 5px 0;
@@ -223,6 +217,7 @@ body {
     overflow-y: auto; /* enable scrolling */
     color: white;
     text-align: center; 
+    font-size: 100%;
 
 }
 
@@ -231,7 +226,6 @@ body {
 }
 
 .mycontainer ul{
-    font-size: 18.6px;
     text-align: left;
     line-height: 1.9;
 }
@@ -498,7 +492,7 @@ selector {
     overflow-wrap: break-word;
     border-radius: 4px;
     font-family: monospace;
-    font-size: 0.899vw;
+    font-size: 100%;
     border: 1px solid #454645;
     white-space: pre-wrap;
 }
