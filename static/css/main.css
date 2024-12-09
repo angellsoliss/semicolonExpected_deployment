@@ -497,7 +497,7 @@ selector {
     overflow-wrap: break-word;
     border-radius: 4px;
     font-family: monospace;
-    font-size: 15px;
+    font-size: 0.899vw;
     border: 1px solid #454645;
     white-space: pre-wrap;
 }
